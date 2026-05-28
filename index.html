@@ -1,12 +1,498 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=https://anc.ca.apm.activecommunities.com/activemississauga/activity/search/detail/112820?onlineSiteId=0&from_original_cui=true&locale=en-US">
-    <script>
-      window.location.href = "https://anc.ca.apm.activecommunities.com/activemississauga/activity/search/detail/112820?onlineSiteId=0&from_original_cui=true&locale=en-US";
-    </script>
-  </head>
-  <body>
-    <p>Redirecting…</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ontario Lifeguard Certification Pathway</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 24px;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .next-panel {
+      background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 170px;
+    }
+
+    .next-panel h2 {
+      margin: 0;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.9;
+    }
+
+    .next-text {
+      margin-top: 16px;
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 1.2;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .course-card {
+      width: 100%;
+       border: 4px solid #cbd5e1;
+      border-radius: 24px;
+      padding: 20px;
+      background: white;
+      color: #334155;
+      cursor: pointer;
+      transition: 0.2s ease;
+      text-align: left;
+    }
+
+    .course-card:hover:not(.disabled) {
+      transform: translateY(-2px);
+    }
+
+    .course-card.completed {
+      background: #dbeafe;
+      border-color: #0ea5e9;
+      color: #0c4a6e;
+    }
+
+    .course-card.highlighted:not(.completed) {
+      background: #dcfce7;
+      border-color: #22c55e;
+      color: #14532d;
+    }
+
+    .course-card.disabled:not(.completed) {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+      color: #64748b;
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .course-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .course-description {
+      margin-top: 8px;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    .input-label {
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #475569;
+    }
+
+    input[type="date"] {
+      margin-top: 8px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 16px;
+    }
+
+    .age-block {
+      margin-top: 20px;
+    }
+
+    .age-label {
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    .age-value {
+      margin-top: 4px;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    #main-courses,
+    #first-aid-courses,
+    #teaching-courses {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    } 
+
+    @media (max-width: 900px) {
+      .top-grid,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="top-grid">
+      <div class="panel">
+        <div class="input-label">Date of Birth</div>
+
+        <input type="date" id="dob" />
+
+        <div class="age-block">
+          <div class="age-label">Current Age</div>
+          <div class="age-value" id="age">--</div>
+        </div>
+      </div>
+
+      <div class="panel next-panel">
+        <h2>Next Certification</h2>
+        <div class="next-text" id="next-certification">
+          Bronze Star
+        </div>
+      </div>
+    </div>
+
+    <div class="layout">
+
+      <div class="section">
+        <div style="margin-top: 8px;">
+          <h3>Lifesaving & Lifeguarding</h3>
+        </div>
+
+        <div id="main-courses"></div>
+      </div>
+
+      <div class="right-column">
+
+        <div class="section">
+          <div style="margin-top: 8px;">
+            <h3>First Aid Certifications</h3>
+          </div>
+          
+          <div id="first-aid-courses"></div>
+        </div>
+
+        <div class="section">
+          <h3>Teaching Certifications</h3>
+          <div id="teaching-courses"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const courses = [
+      {
+        id: 'bronze-star',
+        title: 'Bronze Star',
+        description: 'Prerequisite for Bronze Medallion if not 13 years of age',
+      },
+      {
+        id: 'bronze-medallion',
+        title: 'Bronze Medallion',
+        description: 'Requires 13 years of age or Bronze Star',
+      },
+      {
+        id: 'bronze-cross',
+        title: 'Bronze Cross',
+        description: 'Requires Bronze Medallion and either BFA (EFA) or IFA (SFA)',
+      },
+      {
+        id: 'emergency-first-aid',
+        title: 'Basic First Aid',
+        description: 'Formerly Emergency First Aid',
+      },
+      {
+        id: 'standard-first-aid',
+        title: 'Intermediate First Aid',
+        description: 'Formerly Standard First Aid',
+      },
+      {
+        id: 'national-lifeguard',
+        title: 'National Lifeguard',
+        description: 'Requires Bronze Cross, IFA (SFA), 15 years of age',
+      },
+      {
+        id: 'swim-lifesaving-instructor',
+        title: 'Swim & Lifesaving Instructor',
+        description: 'Requires Bronze Cross, 15 years of age',
+      },
+    ];
+
+    let completed = [];
+    let age = null;
+
+    const dobInput = document.getElementById('dob');
+    const ageText = document.getElementById('age');
+    const nextCertificationText = document.getElementById('next-certification');
+
+    dobInput.addEventListener('change', () => {
+      calculateAge();
+      render();
+    });
+
+    function calculateAge() {
+      if (!dobInput.value) {
+        age = null;
+        ageText.textContent = '--';
+        return;
+      }
+
+      const today = new Date();
+      const birth = new Date(dobInput.value);
+
+      let years = today.getFullYear() - birth.getFullYear();
+
+      const monthDifference = today.getMonth() - birth.getMonth();
+
+      if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < birth.getDate())
+      ) {
+        years--;
+      }
+
+      age = years;
+      ageText.textContent = `${years} years old`;
+    }
+
+    function hasCourse(id) {
+      return completed.includes(id);
+    }
+
+    function hasFirstAid() {
+      return (
+        hasCourse('emergency-first-aid') ||
+        hasCourse('standard-first-aid')
+      );
+    }
+
+    function canTakeMedallion() {
+      return age >= 13 || hasCourse('bronze-star');
+    }
+
+    function getNextCertifications() {
+      if ((!hasCourse('bronze-star')) && (age <13)) {
+        return ['bronze-star'];
+      }
+
+      if (!hasCourse('bronze-medallion')) {
+        return ['bronze-medallion'];
+      }
+
+      if (!hasCourse('bronze-cross')) {
+        if (!hasFirstAid()) {
+          return ['emergency-first-aid', 'standard-first-aid'];
+        }
+
+        return ['bronze-cross'];
+      }
+
+      const next = [];
+
+      if (
+        !hasCourse('national-lifeguard') &&
+        hasCourse('standard-first-aid') &&
+        age >= 15
+      ) {
+        next.push('national-lifeguard');
+      }
+
+      if (
+        !hasCourse('swim-lifesaving-instructor') &&
+        hasCourse('bronze-cross') &&
+        age >= 15
+      ) {
+        next.push('swim-lifesaving-instructor');
+      }
+
+      if (!hasCourse('standard-first-aid')) {
+        next.push('standard-first-aid');
+      }
+
+      if (next.length > 0) {
+        return next;
+      }
+
+      return [];
+    }
+
+    function isDisabled(courseId) {
+      if (hasCourse(courseId)) {
+        return false;
+      }
+
+      if (courseId === 'bronze-medallion') {
+        return !canTakeMedallion();
+      }
+
+      if (courseId === 'bronze-cross') {
+        return (
+          !hasCourse('bronze-medallion') ||
+          !hasFirstAid()
+        );
+      }
+
+      if (courseId === 'national-lifeguard') {
+        return (
+          !hasCourse('bronze-cross') ||
+          !hasCourse('standard-first-aid') ||
+          age < 15
+        );
+      }
+
+      if (courseId === 'swim-lifesaving-instructor') {
+        return (
+          !hasCourse('bronze-cross') ||
+          age < 15
+        );
+      }
+
+      return false;
+    }
+
+    function toggleCourse(id) {
+      if (isDisabled(id)) {
+        return;
+      }
+
+      if (completed.includes(id)) {
+        completed = completed.filter(course => course !== id);
+      } else {
+        completed.push(id);
+      }
+
+      render();
+    }
+
+    function createCard(course, highlighted) {
+      const button = document.createElement('button');
+
+      button.className = 'course-card';
+
+      if (hasCourse(course.id)) {
+        button.classList.add('completed');
+      }
+
+      if (highlighted && !hasCourse(course.id)) {
+        button.classList.add('highlighted');
+      }
+
+      if (isDisabled(course.id) && !hasCourse(course.id)) {
+        button.classList.add('disabled');
+      }
+
+      button.innerHTML = `
+        <div class="course-title">${course.title}</div>
+        <div class="course-description">${course.description}</div>
+      `;
+
+      button.addEventListener('click', () => toggleCourse(course.id));
+
+      return button;
+    }
+
+    function renderSection(containerId, filterFn) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      const next = getNextCertifications();
+
+      courses
+        .filter(filterFn)
+        .forEach(course => {
+          const highlighted = next.includes(course.id);
+          const card = createCard(course, highlighted);
+          container.appendChild(card);
+        });
+    }
+
+    function render() {
+      const next = getNextCertifications();
+
+      if (age < 15){
+        nextCertificationText.textContent = next
+          .map(id => courses.find(c => c.id === id)?.title)
+          .join(' or ') || 'Age requirements not met';
+      } else {
+
+        nextCertificationText.textContent = next
+          .map(id => courses.find(c => c.id === id)?.title)
+          .join(' or ') || 'Completed!';
+      }
+
+      renderSection(
+        'main-courses',
+        course =>
+          ['bronze-star', 'bronze-medallion', 'bronze-cross', 'national-lifeguard'].includes(course.id)
+      );
+
+      renderSection(
+        'first-aid-courses',
+        course =>
+          ['emergency-first-aid', 'standard-first-aid'].includes(course.id)
+      );
+
+      renderSection(
+        'teaching-courses',
+        course => course.id === 'swim-lifesaving-instructor'
+      );
+    }
+
+    render();
+  </script>
+</body>
 </html>
